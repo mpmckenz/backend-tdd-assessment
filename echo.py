@@ -13,29 +13,32 @@ def create_parser():
     """Creates and returns an argparse cmd line option parser"""
     parser = argparse.ArgumentParser(
         description='Perform transformation on input text.')
+    parser.add_argument('text', help='text to be manipulated')
     parser.add_argument(
         "-u", "--upper", help="convert text to uppercase", action="store_true")
-    parser.add_argument('string', help='enter your string')
     parser.add_argument(
         "-l", "--lower", help="convert text to lowercase", action="store_true")
     parser.add_argument(
         "-t", "--title", help="convert text to titlecase", action="store_true")
-    # parser.add_argument(
-    # "-h", "--help", help="", action="store_true")
     return parser
 
 
 def main(args):
     """Implementation of echo"""
     parser = create_parser()
+    if not args:
+        parser.print_usage()
+        sys.exit(1)
+
     namespace = parser.parse_args(args)
-    if namespace.upper:
-        namespace.string = namespace.string.upper()
+    if namespace.title:
+        namespace.text = namespace.text.title()
     elif namespace.lower:
-        namespace.string = namespace.string.lower()
-    elif namespace.title:
-        namespace.string = namespace.string.title()
-    return namespace.string
+        namespace.text = namespace.text.lower()
+    elif namespace.upper:
+        namespace.text = namespace.text.upper()
+
+    return namespace.text
 
 
 if __name__ == '__main__':
