@@ -20,6 +20,8 @@ def create_parser():
         "-l", "--lower", help="convert text to lowercase", action="store_true")
     parser.add_argument(
         "-t", "--title", help="convert text to titlecase", action="store_true")
+    # parser.add_argument(
+    # "-h", "--help", help="", action="store_true")
     return parser
 
 
